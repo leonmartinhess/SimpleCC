@@ -9,9 +9,11 @@ CLS
 ECHO 1 - MD5
 ECHO 2 - SHA1
 ECHO 3 - SHA256
+ECHO 4 - All
 
-CHOICE /C 123 /M "What Checksum you want to check?"
+CHOICE /C 1234 /M "What Checksum you want to check?"
 
+IF ERRORLEVEL 4 GOTO All
 IF ERRORLEVEL 3 GOTO SHA256
 IF ERRORLEVEL 2 GOTO SHA1
 IF ERRORLEVEL 1 GOTO MD5
@@ -33,6 +35,15 @@ ECHO
 CLS
 certUtil -hashfile %UserInputPath% SHA256
 GOTO End
+
+:All
+ECHO 
+CLS
+certUtil -hashfile %UserInputPath% MD5
+ECHO:
+certUtil -hashfile %UserInputPath% SHA1
+ECHO:
+certUtil -hashfile %UserInputPath% SHA256
 
 :End
 pause
