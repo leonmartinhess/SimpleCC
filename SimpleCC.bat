@@ -1,4 +1,5 @@
 @echo off
+:Start
 CLS
 TITLE Checksum Checker by Mahele
 ECHO Just type the first letters of your file and use TAB to autocomplete.
@@ -44,6 +45,10 @@ ECHO:
 certUtil -hashfile %UserInputPath% SHA1
 ECHO:
 certUtil -hashfile %UserInputPath% SHA256
+GOTO End
 
 :End
+ECHO:
+ECHO Press Enter to get back to Start!
 pause
+GOTO Start
